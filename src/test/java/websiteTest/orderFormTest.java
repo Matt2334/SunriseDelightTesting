@@ -24,7 +24,13 @@ public class orderFormTest {
     public void tearDown(){
         driver.quit();
     }
-    
+
+    public String phoneNumberGenerator(){
+        String nums="";
+        for(int i=0; i<10; i++) nums += Integer.toString((int) (Math.random() * 10));
+        return nums;
+    }
+
     @Test
     public void orderFormSuccessful(){
         driver.findElement(By.className("minimal")).click();
@@ -41,10 +47,8 @@ public class orderFormTest {
 
         driver.findElements(By.className("checkbox")).get((int) (Math.random() * 4)).click();
         driver.findElement(By.id("name")).sendKeys("Test Jonny");
-
-        // Future: add section to randomly generate 10 numbers between 0 and 9 
-        driver.findElement(By.id("phone")).sendKeys("1112223432");
-
+       
+        driver.findElement(By.id("phone")).sendKeys(phoneNumberGenerator());
         driver.findElement(By.className("input-comments")).sendKeys("Test Test Test...");
         driver.findElement(By.id("promo")).sendKeys("test-123");
         driver.findElement(By.className("apply_code")).click();
@@ -63,7 +67,7 @@ public class orderFormTest {
         
         driver.findElements(By.className("checkbox")).get((int) (Math.random() * 4)).click();
         driver.findElement(By.id("name")).sendKeys("Test Jonny");
-        driver.findElement(By.id("phone")).sendKeys("1112223432");
+        driver.findElement(By.id("phone")).sendKeys(phoneNumberGenerator());
         driver.findElement(By.className("place-order")).click();
         String message = driver.findElement(By.xpath("//p[\'Quantity needs to be at-least 1\'] ")).getText();
         Assert.assertTrue(message.contains("Quantity needs to be at-least 1"),"\n Message Does Not contain at-least 1");
@@ -81,7 +85,7 @@ public class orderFormTest {
         
         driver.findElements(By.className("checkbox")).get((int) (Math.random() * 4)).click();
         driver.findElement(By.id("name")).sendKeys("Test Jonny");
-        driver.findElement(By.id("phone")).sendKeys("1112223432");
+        driver.findElement(By.id("phone")).sendKeys(phoneNumberGenerator());
         driver.findElement(By.className("place-order")).click();    
         String message = driver.findElement(By.xpath("//p[\'Please Selext a valid date\'] ")).getText();
         Assert.assertTrue(message.contains("Please Select a valid date"),"\n Message Does Not contain select valid date");
