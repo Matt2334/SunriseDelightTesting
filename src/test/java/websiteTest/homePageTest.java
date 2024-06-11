@@ -15,7 +15,7 @@ public class homePageTest {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get("");
+        driver.get("http://127.0.0.1:8000/");
     }
 
     @AfterTest
